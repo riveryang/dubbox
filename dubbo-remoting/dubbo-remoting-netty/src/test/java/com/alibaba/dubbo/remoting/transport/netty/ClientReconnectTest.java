@@ -79,7 +79,7 @@ public class ClientReconnectTest {
         }catch (Exception e) {
             //do nothing
         }
-        Thread.sleep(1500);//重连线程的运行
+        Thread.sleep(3000);//重连线程的运行
         //时间不够长，不会产生error日志
         Assert.assertEquals("no error message ", 0 , LogUtil.findMessage(Level.ERROR, "client reconnect to "));
         //第一次重连失败就会有warn日志
