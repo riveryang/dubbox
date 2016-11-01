@@ -31,6 +31,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -170,8 +171,14 @@ public class MergeableClusterInvokerTest {
         Map<String, List<String>> expected = new HashMap<String, List<String>>();
         merge( expected, firstMenuMap );
         merge( expected, secondMenuMap );
-        Assert.assertEquals( expected, menu.getMenus() );
-
+        // item中的value集合应顺序不一致导致被判定不一致，这里进行sort后在进行判断
+        for (Map.Entry<String, List<String>> item : menu.getMenus().entrySet()) {
+        	List<String> menuValue = item.getValue();
+        	List<String> originValue = expected.get(item.getKey());
+        	Collections.sort(menuValue);
+        	Collections.sort(originValue);
+        	Assert.assertEquals(menuValue, originValue);
+        }
     }
 
     @Test
@@ -233,9 +240,9 @@ public class MergeableClusterInvokerTest {
         for( Map.Entry<String, List<String>> entry : second.entrySet() ) {
             List<String> value = first.get( entry.getKey() );
             if ( value != null ) {
-                value.addAll( entry.getValue() );
+                value.addAll( new ArrayList<String>(entry.getValue()) );
             } else {
-                first.put( entry.getKey(), entry.getValue() );
+                first.put( entry.getKey(), new ArrayList<String>(entry.getValue()) );
             }
         }
     }

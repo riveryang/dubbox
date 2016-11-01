@@ -31,7 +31,12 @@ public class Menu {
     public Menu() {}
     
     public Menu( Map<String, List<String>> menus ) {
-        this.menus.putAll( menus );
+    	// Map赋值后进行merge操作会改变原有map内容，使用addMenu设置value对象(List对象每次为新对象)，防止原始内容改变
+    	if (menus != null && menus.size() > 0) {
+    		for (Map.Entry<String, List<String>> entry : menus.entrySet()) {
+    			addMenu(entry.getKey(), entry.getValue());
+    		}
+    	}
     }
     
     public void putMenuItem( String menu, String item ) {

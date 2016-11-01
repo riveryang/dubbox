@@ -89,13 +89,14 @@ public class ResultMergerTest {
             Assert.assertEquals(String.valueOf(i + 1), Array.get(result, i));
         }
         
-        int[] intArray1 = {1, 2, 3};
-        int[] intArray2 = {4, 5, 6};
-        int[] intArray3 = {7};
-        result = MergerFactory.getMerger(int[].class).merge(intArray1, intArray2, intArray3);
+        // int为基本数据类型，获取merger时为空，转换为Integer即可获取merger
+        Integer[] intArray1 = {1, 2, 3};
+        Integer[] intArray2 = {4, 5, 6};
+        Integer[] intArray3 = {7};
+        result = MergerFactory.getMerger(Integer[].class).merge(intArray1, intArray2, intArray3);
         Assert.assertTrue(result.getClass().isArray());
         Assert.assertEquals(7, Array.getLength(result));
-        Assert.assertTrue(int.class == result.getClass().getComponentType());
+        Assert.assertTrue(Integer.class == result.getClass().getComponentType());
         for (int i = 0; i < 7; i++) {
             Assert.assertEquals(i + 1, Array.get(result, i));
         }

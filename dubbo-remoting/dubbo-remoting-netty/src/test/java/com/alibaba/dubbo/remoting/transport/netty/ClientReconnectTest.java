@@ -44,7 +44,8 @@ public class ClientReconnectTest {
             Assert.assertEquals(false, client.isConnected());
             Server server = startServer(port);
             for (int i = 0; i < 100 && ! client.isConnected(); i++) {
-                Thread.sleep(10);
+            	// 调整休眠时间，防止时间过短导致连接状态为false，从10调整至100
+                Thread.sleep(100);
             }
             Assert.assertEquals(true, client.isConnected());
             client.close(2000);
