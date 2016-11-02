@@ -37,15 +37,13 @@ import com.alibaba.dubbo.rpc.cluster.support.AbstractClusterInvoker;
 @SuppressWarnings("unchecked")
 public class StickyTest {
 
-    List<Invoker<StickyTest>> invokers = new ArrayList<Invoker<StickyTest>>();
-    
-    
-    Invoker<StickyTest> invoker1 = EasyMock.createMock(Invoker.class);
-    Invoker<StickyTest> invoker2 = EasyMock.createMock(Invoker.class);
+    List<Invoker<StickyTest>> invokers;
+    Invoker<StickyTest> invoker1;
+    Invoker<StickyTest> invoker2;
     RpcInvocation invocation;
     Directory<StickyTest> dic ;
-    Result result = new RpcResult();
-    StickyClusterInvoker<StickyTest> clusterinvoker = null;
+    Result result;
+    StickyClusterInvoker<StickyTest> clusterinvoker;
     
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -56,6 +54,12 @@ public class StickyTest {
         dic = EasyMock.createMock(Directory.class);
         invocation = new RpcInvocation();
         
+        // 从全局初始化改为Before中初始化，确保不同单元测试中的对象不一致
+        invokers = new ArrayList<Invoker<StickyTest>>();
+        invoker1 = EasyMock.createMock(Invoker.class);
+        invoker2 = EasyMock.createMock(Invoker.class);
+        result = new RpcResult();
+        
         EasyMock.expect(dic.getUrl()).andReturn(url).anyTimes();
         EasyMock.expect(dic.list(invocation)).andReturn(invokers).anyTimes();
         EasyMock.expect(dic.getInterface()).andReturn(StickyTest.class).anyTimes();
@@ -65,6 +69,7 @@ public class StickyTest {
         
         clusterinvoker = new StickyClusterInvoker<StickyTest>(dic);
     }
+    
     URL url = URL.valueOf("test://test:11/test?" 
             +"&loadbalance=roundrobin"
 //            +"&"+Constants.CLUSTER_AVAILABLE_CHECK_KEY+"=true"
