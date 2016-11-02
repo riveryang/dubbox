@@ -51,7 +51,7 @@
 		<module>dubbo-simple</module>
 		<module>dubbo-admin</module>
 		<module>dubbo-demo</module>
-		<!-- <module>hessian-lite</module> -->
+		<module>hessian-lite</module>
         <!--<module>dubbo-tool/dubbo-demo-lite-archetype</module>-->
 	</modules>
 	<profiles>
@@ -209,7 +209,7 @@ limitations under the License.</copyright>
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>hessian-lite</artifactId>
-				<version>${hessian_lite_version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.alibaba</groupId>
