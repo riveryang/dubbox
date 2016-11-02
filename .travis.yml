@@ -19,7 +19,7 @@ install:
   - docker run -d --name redis_6379 -p 6379:6379 -e REDIS_PASSWORD=testpass riveryang/redis:alpine
   
 script:
-  - mvn test -Djava.net.preferIPv4Stack=true
+  - ./build.sh
   
 notifications:
   email: false
