@@ -755,7 +755,8 @@ public class ExtensionLoader<T> {
         
         codeBuidler.append("package " + type.getPackage().getName() + ";");
         codeBuidler.append("\nimport " + ExtensionLoader.class.getName() + ";");
-        codeBuidler.append("\npublic class " + type.getSimpleName() + "$Adpative" + " implements " + type.getCanonicalName() + " {");
+        // $Adpative -> $Adaptive
+        codeBuidler.append("\npublic class " + type.getSimpleName() + "$Adaptive" + " implements " + type.getCanonicalName() + " {");
         
         for (Method method : methods) {
             Class<?> rt = method.getReturnType();
