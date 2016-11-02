@@ -236,7 +236,8 @@ public class ConfigTest {
             int i = 0;
             while ((i ++) < 60 && urls == null) {
                 urls = registryService.getRegistered().get("com.alibaba.dubbo.config.spring.api.DemoService");
-                Thread.sleep(10);
+                // travis环境较慢，休眠时间从10提升到100
+                Thread.sleep(100);
             }
             assertNotNull(urls);
             assertEquals(1, urls.size());
