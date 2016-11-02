@@ -860,7 +860,11 @@ public class ConfigTest {
         } finally {
             if (StringUtils.isNotEmpty(dubboPort)) {
                 System.setProperty("dubbo.protocol.dubbo.port", dubboPort);
+            } else {
+            	// dubboPort为空时，设置dubbo.protocol.dubbo.port=""
+            	System.setProperty("dubbo.protocol.dubbo.port", "");	
             }
+            
             if (service != null) {
                 service.unexport();
             }
