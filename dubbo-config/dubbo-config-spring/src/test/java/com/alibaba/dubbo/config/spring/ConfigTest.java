@@ -27,7 +27,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -54,7 +53,6 @@ import com.alibaba.dubbo.config.spring.impl.HelloServiceImpl;
 import com.alibaba.dubbo.config.spring.registry.MockRegistry;
 import com.alibaba.dubbo.config.spring.registry.MockRegistryFactory;
 import com.alibaba.dubbo.registry.Registry;
-import com.alibaba.dubbo.registry.RegistryFactory;
 import com.alibaba.dubbo.registry.RegistryService;
 import com.alibaba.dubbo.rpc.Exporter;
 import com.alibaba.dubbo.rpc.Filter;
