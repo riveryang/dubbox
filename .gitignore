@@ -31,3 +31,6 @@ target/
 .DS_Store
 Thumbs.db
 
+# coverage ignore
+coverage-local.sh
+

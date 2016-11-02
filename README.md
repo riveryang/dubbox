@@ -1,3 +1,8 @@
+[![Release](https://img.shields.io/badge/release-2.8.4-blue.svg)](https://github.com/riveryang/dubbox/releases)
+[![Build Status](https://travis-ci.org/riveryang/dubbox.svg?branch=master)](https://travis-ci.org/riveryang/dubbox)
+[![Coverage Status](https://coveralls.io/repos/github/riveryang/dubbox/badge.svg)](https://coveralls.io/github/riveryang/dubbox)
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+
 Dubbox now means Dubbo eXtensions. If you know java, javax and dubbo, you know what dubbox is :)
 
 Dubbox adds features like RESTful remoting, Kyro/FST serialization, etc to the popular [dubbo service framework](http://github.com/alibaba/dubbo). It's been used by several projects of [dangdang.com](http://www.dangdang.com), which is one of the major e-commerce companies in China.
