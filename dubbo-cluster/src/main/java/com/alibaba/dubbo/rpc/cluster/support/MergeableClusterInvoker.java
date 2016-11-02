@@ -19,7 +19,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -83,7 +83,8 @@ public class MergeableClusterInvoker<T> implements Invoker<T> {
             returnType = null;
         }
         
-        Map<String, Future<Result>> results = new HashMap<String, Future<Result>>();
+        // HashMap 在不同JDK版本里的默认顺序不一致，这里使用LinkedHashMap代替HashMap，来保证顺序一致
+        Map<String, Future<Result>> results = new LinkedHashMap<String, Future<Result>>();
         for( final Invoker<T> invoker : invokers ) {
             Future<Result> future = executor.submit( new Callable<Result>() {
                 public Result call() throws Exception {

@@ -17,6 +17,7 @@ package com.alibaba.dubbo.remoting.transport.netty;
 
 import org.apache.log4j.Level;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.alibaba.dubbo.common.Constants;
@@ -36,6 +37,16 @@ import com.alibaba.dubbo.remoting.exchange.support.ExchangeHandlerAdapter;
  *
  */
 public class ClientReconnectTest {
+	
+	/**
+	 * 
+	 * 因DubboAppender.logList为static对象，不同的单元测试可能会存在调用顺序的问题导致logList中包含前次单元测试的记录，在这里需要进行清理.
+	 */
+	@Before
+	public void beforeClearDubboAppenderLogList() {
+		DubboAppender.clear();
+	}
+	
     @Test
     public void testReconnect() throws RemotingException, InterruptedException{
         {
@@ -79,7 +90,7 @@ public class ClientReconnectTest {
         }catch (Exception e) {
             //do nothing
         }
-        Thread.sleep(3000);//重连线程的运行
+        Thread.sleep(1500);//重连线程的运行
         //时间不够长，不会产生error日志
         Assert.assertEquals("no error message ", 0 , LogUtil.findMessage(Level.ERROR, "client reconnect to "));
         //第一次重连失败就会有warn日志
@@ -114,7 +125,7 @@ public class ClientReconnectTest {
     public void testClientReconnectMethod() throws RemotingException, InterruptedException{
         int port = NetUtils.getAvailablePort();
         String url = "exchange://127.0.0.3:"+port + "/client.reconnect.test?check=false&"
-        +Constants.RECONNECT_KEY+"="+10 //1ms reconnect,保证有足够频率的重连
+        +Constants.RECONNECT_KEY+"="+10 //10ms reconnect,保证有足够频率的重连
         +"&reconnect.waring.period=1";
         DubboAppender.doStart();
         Client client = Exchangers.connect(url);

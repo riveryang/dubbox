@@ -171,14 +171,8 @@ public class MergeableClusterInvokerTest {
         Map<String, List<String>> expected = new HashMap<String, List<String>>();
         merge( expected, firstMenuMap );
         merge( expected, secondMenuMap );
-        // item中的value集合应顺序不一致导致被判定不一致，这里进行sort后在进行判断
-        for (Map.Entry<String, List<String>> item : menu.getMenus().entrySet()) {
-        	List<String> menuValue = item.getValue();
-        	List<String> originValue = expected.get(item.getKey());
-        	Collections.sort(menuValue);
-        	Collections.sort(originValue);
-        	Assert.assertEquals(menuValue, originValue);
-        }
+        Assert.assertEquals( expected, menu.getMenus() );
+        
     }
 
     @Test

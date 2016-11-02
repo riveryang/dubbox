@@ -90,8 +90,7 @@ public class MockInvokersSelector implements Router {
     }
 
     public int compareTo(Router o) {
-    	// JDK6 与 JDK7/8 的排序有所不同，这里从 1 改成 -1，保证 MockInvokersSelector排在最前?
-        return -1;
+        return 1;
     }
 
 }

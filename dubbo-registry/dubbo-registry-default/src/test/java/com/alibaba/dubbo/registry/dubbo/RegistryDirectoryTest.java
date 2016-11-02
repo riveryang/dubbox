@@ -539,23 +539,38 @@ public class RegistryDirectoryTest {
 
         List<URL> serviceUrls = new ArrayList<URL>();
         // without ROUTER_KEY, the first router should not be created.
-        serviceUrls.add(routerurl.addParameter(Constants.CATEGORY_KEY, Constants.ROUTERS_CATEGORY).addParameter(Constants.TYPE_KEY, "javascript").addParameter(Constants.ROUTER_KEY,
-                                                                                                 "notsupported").addParameter(Constants.RULE_KEY,
-                                                                                                                              "function test1(){}"));
-        serviceUrls.add(routerurl2.addParameter(Constants.CATEGORY_KEY, Constants.ROUTERS_CATEGORY).addParameter(Constants.TYPE_KEY, "javascript").addParameter(Constants.ROUTER_KEY,
-                                                                                                  ScriptRouterFactory.NAME).addParameter(Constants.RULE_KEY,
-                                                                                                                                         "function test1(){}"));
+		serviceUrls.add(routerurl.addParameter(Constants.CATEGORY_KEY, Constants.ROUTERS_CATEGORY)
+				.addParameter(Constants.TYPE_KEY, "javascript").addParameter(Constants.ROUTER_KEY, "notsupported")
+				.addParameter(Constants.RULE_KEY, "function test1(){}"));
+		serviceUrls.add(routerurl2.addParameter(Constants.CATEGORY_KEY, Constants.ROUTERS_CATEGORY)
+				.addParameter(Constants.TYPE_KEY, "javascript")
+				.addParameter(Constants.ROUTER_KEY, ScriptRouterFactory.NAME)
+				.addParameter(Constants.RULE_KEY, "function test1(){}"));
 
         registryDirectory.notify(serviceUrls);
         List<Router> routers = registryDirectory.getRouters();
         //default invocation selector
-        Assert.assertEquals(1+1, routers.size());
-        Assert.assertEquals(ScriptRouter.class, routers.get(1).getClass());
-
+        Assert.assertEquals(1 + 1, routers.size());
+        
+        // jdk7 及以上版本的排序与 jdk6不一致，导致排序结果不同
+        final String jdkVersion = System.getProperty("java.version");
+        if (jdkVersion.contains("1.6")) {
+        	Assert.assertEquals(ScriptRouter.class, routers.get(1).getClass());
+        } else if (jdkVersion.compareTo("1.6") > 0) {
+        	Assert.assertEquals(ScriptRouter.class, routers.get(0).getClass());
+        }
+        
         registryDirectory.notify(new ArrayList<URL>());
         routers = registryDirectory.getRouters();
         Assert.assertEquals(1 + 1, routers.size());
-        Assert.assertEquals(ScriptRouter.class, routers.get(1).getClass());
+        
+        // jdk7 及以上版本的排序与 jdk6不一致，导致排序结果不同
+        if (jdkVersion.contains("1.6")) {
+        	Assert.assertEquals(ScriptRouter.class, routers.get(1).getClass());
+        } else if (jdkVersion.compareTo("1.6") > 0) {
+        	// jdk7 及以上版本的排序与 jdk6不一致，导致排序结果不同
+        	Assert.assertEquals(ScriptRouter.class, routers.get(0).getClass());
+        }
 
         serviceUrls.clear();
         serviceUrls.add(routerurl.addParameter(Constants.ROUTER_KEY, Constants.ROUTER_TYPE_CLEAR));

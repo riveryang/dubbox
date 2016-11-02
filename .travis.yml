@@ -1,0 +1,15 @@
+language: java
+jdk:
+  - oraclejdk6
+  - oraclejdk7
+  - oraclejdk8
+  
+services:
+  - docker
+
+install:
+  - docker pull riveryang/redis:alpine
+  - docker run -d --name redis_6379 -p 6379:6379 -e REDIS_PASSWORD=testpass riveryang/redis:alpine
+  
+notifications:
+  email: false
