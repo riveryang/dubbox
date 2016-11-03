@@ -1,4 +1,4 @@
-[![Release](https://img.shields.io/badge/release-2.8.4-blue.svg)](https://github.com/riveryang/dubbox/releases)
+[![Release](https://img.shields.io/badge/dubbo-3.0.0-blue.svg)](https://github.com/riveryang/dubbox/releases)
 [![Build Status](https://travis-ci.org/riveryang/dubbox.svg?branch=master)](https://travis-ci.org/riveryang/dubbox)
 [![Coverage Status](https://coveralls.io/repos/github/riveryang/dubbox/badge.svg)](https://coveralls.io/github/riveryang/dubbox)
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
