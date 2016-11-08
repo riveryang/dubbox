@@ -932,7 +932,10 @@ public class ExtensionLoader<T> {
                     if (i > 0) {
                         codeBuidler.append(", ");
                     }
-                    codeBuidler.append(pts[i].getCanonicalName());
+                    
+                    // FIXED: pts -> ets
+                    // 构建throws块代码时使用了参数数组，这里替换成正确的异常数组
+                    codeBuidler.append(ets[i].getCanonicalName());
                 }
             }
             codeBuidler.append(" {");
