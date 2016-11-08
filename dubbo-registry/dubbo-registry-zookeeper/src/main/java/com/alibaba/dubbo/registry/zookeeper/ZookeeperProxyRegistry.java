@@ -24,9 +24,9 @@ import com.alibaba.dubbo.remoting.zookeeper.ZookeeperTransporter;
  * @author yanghe
  * @since 3.0.1
  */
-public class ZookeeperDockerRegistry extends ZookeeperRegistry {
+public class ZookeeperProxyRegistry extends ZookeeperRegistry {
 
-	public ZookeeperDockerRegistry(final URL url, final ZookeeperTransporter zookeeperTransporter) {
+	public ZookeeperProxyRegistry(final URL url, final ZookeeperTransporter zookeeperTransporter) {
 		super(url, zookeeperTransporter);
 	}
 

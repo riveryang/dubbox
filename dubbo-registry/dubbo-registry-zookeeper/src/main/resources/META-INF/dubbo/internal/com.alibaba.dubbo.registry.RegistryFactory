@@ -1,1 +1,1 @@
-zookeeper=com.alibaba.dubbo.registry.zookeeper.ZookeeperDockerRegistryFactory
+zookeeper=com.alibaba.dubbo.registry.zookeeper.ZookeeperProxyRegistryFactory

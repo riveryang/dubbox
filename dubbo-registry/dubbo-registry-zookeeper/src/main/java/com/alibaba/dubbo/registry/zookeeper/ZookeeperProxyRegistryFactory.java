@@ -23,10 +23,10 @@ import com.alibaba.dubbo.registry.Registry;
  * @author yanghe
  * @since 3.0.1
  */
-public class ZookeeperDockerRegistryFactory extends ZookeeperRegistryFactory {
+public class ZookeeperProxyRegistryFactory extends ZookeeperRegistryFactory {
 
 	@Override
 	public Registry createRegistry(URL url) {
-		return new ZookeeperDockerRegistry(url, zookeeperTransporter);
+		return new ZookeeperProxyRegistry(url, zookeeperTransporter);
 	}
 }
