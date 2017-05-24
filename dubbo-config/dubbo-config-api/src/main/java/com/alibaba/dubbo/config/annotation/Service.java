@@ -106,6 +106,8 @@ public @interface Service {
 
     String[] parameters() default {};
 
+    // 以下属性作用于Spring初始化过程，在AnnotationBean中获取，通过设置Spring BeanId来获取配置对象
+    // Begin
     String application() default "";
 
     String module() default "";
@@ -117,5 +119,6 @@ public @interface Service {
     String monitor() default "";
 
     String[] registry() default {};
-
+    // End
+    
 }
